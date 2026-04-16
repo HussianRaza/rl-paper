@@ -1,0 +1,92 @@
+# Hedger Pool Configuration
+hedger_pool_size: 30 
+
+# Delta-based Hedgers
+delta_hedger_thresholds:
+  - 0.0    
+  - 0.01     
+  - 0.02
+  - 0.04
+  - 0.06
+  - 0.08
+  - 0.10   
+  - 0.12
+  - 0.15
+  - 0.20
+  - 0.25
+  - 0.30
+  - 0.35
+  - 0.40
+  - 0.50
+  - 0.60
+  - 0.70
+  - 0.80
+  - 0.90    
+delta_hedger_ratio: 1.0 
+
+# Price-based Hedgers
+price_hedger_thresholds:
+  - 0.005    
+  - 0.01     
+  - 0.02     
+  - 0.03     
+  - 0.04     
+  - 0.05     
+  - 0.07    
+  - 0.10     
+  - 0.12     
+  - 0.15     
+  - 0.20     
+  - 0.30     
+  - 0.50    
+  - 1.00    
+price_hedger_ratio: 1.0  
+
+# Deep hedger model paths
+deep_hedger_models:
+  - model_path: "models/deep_hedger_lambda_0.1.pt"
+    device: "cuda"
+  
+  - model_path: "models/deep_hedger_lambda_0.2.pt"
+    device: "cuda"
+  
+  - model_path: "models/deep_hedger_lambda_0.5.pt"
+    device: "cuda"
+  
+  - model_path: "models/deep_hedger_lambda_1.pt"
+    device: "cuda"
+  
+  - model_path: "models/deep_hedger_lambda_2.pt"
+    device: "cuda"
+  
+  - model_path: "models/deep_hedger_lambda_5.pt"
+    device: "cuda"
+
+  - model_path: "models/deep_hedger_lambda_10.pt"
+    device: "cuda"
+  
+  - model_path: "models/deep_hedger_lambda_20.pt"
+    device: "cuda"
+  
+  - model_path: "models/deep_hedger_lambda_40.pt"
+    device: "cuda"
+  
+  - model_path: "models/deep_hedger_lambda_100.pt"
+    device: "cuda"
+
+# Deep hedger feature configuration
+deep_hedger_feature_config:
+  extra_feature_dim: 26
+  selected_feature_path: "configs/selected_feature.pkl"
+  position_feature_dim: 0
+
+
+# Baseline Hedger 
+baseline_hedger:
+  type: "delta_threshold"
+  delta_threshold: 0.1  # Paper default baseline
+  hedge_ratio: 1.0
+
+
+
+

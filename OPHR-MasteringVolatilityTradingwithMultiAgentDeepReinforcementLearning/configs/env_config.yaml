@@ -1,0 +1,66 @@
+# Environment Configuration
+
+episode_length: 14  
+option_interval: 180  
+hedge_interval: 60  
+
+# Initial capital
+initial_capital: 10.0  
+
+pm_config:
+  BTC:
+    price_range: 0.16
+    min_expiry_delta_shock: 0.01
+    annualized_move_risk: 0.075
+    extended_dampener: 100000
+    volatility_range_up: 0.50
+    volatility_range_down: 0.25
+    short_term_vega_power: 0.30
+    long_term_vega_power: 0.13
+    delta_total_liquidity_shock_threshold: 20000000
+    max_delta_shock: 0.10
+    min_volatility_for_shock_up: 0.50
+    extended_table_factor: 1.00
+    
+  ETH:
+    price_range: 0.16
+    min_expiry_delta_shock: 0.01
+    annualized_move_risk: 0.075
+    extended_dampener: 100000
+    volatility_range_up: 0.50
+    volatility_range_down: 0.25
+    short_term_vega_power: 0.30
+    long_term_vega_power: 0.13
+    delta_total_liquidity_shock_threshold: 20000000
+    max_delta_shock: 0.10
+    min_volatility_for_shock_up: 0.50
+    extended_table_factor: 1.00
+
+# Fee Configuration(Deribit)
+fee_config:
+  futures_perpetual: 0.0000  # 0.00%
+  options:
+    per_contract: 0.0003  # 0.03%
+    capped_at: 0.125
+  combo_fees:
+    second_leg_reduction: 1  # second leg free
+
+
+
+data_paths:
+  option_chain: "${DATA_ROOT}/${CRYPTO}/option_chain"
+  perpetual: "${DATA_ROOT}/${CRYPTO}/perp.parquet"
+  volatility_ticker: "${DATA_ROOT}/${CRYPTO}/volticker.parquet"
+  valid_option_file: "${DATA_ROOT}/${CRYPTO}/valid_option_dict.pkl"
+  
+backtest:
+  train_start: "2019-04-01"
+  train_end: "2022-12-31"
+  val_start: "2023-01-01"
+  val_end: "2023-06-30"
+  # Sample data : 2024-01-01 to 2024-04-01
+  test_start: "2024-01-01"
+  test_end: "2024-04-01"
+
+
+

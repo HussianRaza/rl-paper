@@ -1,0 +1,39 @@
+# Evaluation Configuration
+
+metrics:
+  annual_trading_days: 365
+  risk_free_rate: 0.0
+  
+  compute_metrics:
+    - "TR"    # Total Return
+    - "AVOL"  # Annual Volatility
+    - "MDD"   # Maximum Drawdown
+    - "ASR"   # Annual Sharpe Ratio
+    - "ACR"   # Annual Calmar Ratio
+    - "ASoR"  # Annual Sortino Ratio
+    - "WR"    # Win Rate
+    - "PLR"   # Profit/Loss Ratio
+    - "HP"    # Holding Period
+
+visualization:
+  figure_size: [15, 12]
+  save_format: "png"
+  dpi: 300
+  
+  plots:
+    pnl_curve: true
+    greeks_evolution: true
+    position_analysis: true
+    trade_statistics: true
+
+report:
+  save_csv: true
+  save_metrics_txt: true
+  output_dir: "results"
+  
+trade_analysis:
+  separate_directions: true
+  min_holding_period: 1
+
+
+

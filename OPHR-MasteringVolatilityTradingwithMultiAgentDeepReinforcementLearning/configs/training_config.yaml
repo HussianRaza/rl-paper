@@ -1,0 +1,45 @@
+op_agent:
+  hidden_dims: [1024, 1024]
+  learning_rate: 0.0001
+  batch_size: 512
+  replay_buffer_size: 100000
+  n_step: 12
+  gamma: 0.99
+  epsilon_start: 0.9
+  epsilon_end: 0.01
+  epsilon_decay_steps: 10000
+  update_frequency: 1
+  updates_per_episode: 20
+  target_update_frequency: 10
+  soft_update_tau: 0.005
+  dropout_rate: 0.2
+  oracle_episodes: 1000
+  train_episodes: 1000
+  eval_frequency: 50
+
+hr_agent:
+  hidden_dims: [1024, 1024]
+  learning_rate: 0.0001
+  batch_size: 512
+  replay_buffer_size: 50000
+  gamma: 0.99
+  epsilon_start: 0.9
+  epsilon_end: 0.01
+  epsilon_decay_steps: 10000
+  update_frequency: 1
+  updates_per_step: 10
+  target_update_frequency: 100
+  n_hr: 24
+  warmup_episodes: 50
+  train_episodes: 500
+
+iterative_training:
+  num_iterations: 5
+  op_episodes_per_iter: 200
+  hr_episodes_per_iter: 50
+
+oracle:
+  future_rv_horizons: [3, 6, 9, 12, 24]
+  beta_thresholds: [0.1, 0.2, 0.4, 0.6, 0.8]
+  epsilon_oracle: 0.1
+  lookforward_window: 168
