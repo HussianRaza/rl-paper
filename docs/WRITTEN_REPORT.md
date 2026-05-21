@@ -3,13 +3,22 @@
 ## Research Paper Analysis & Implementation Report
 
 **Course:** CT-469 Reinforcement Learning | Spring 2026  
+**Course Instructor:** Dr. Murk Marvi
+
+**Group Members:**
+
+| Name | Roll No |
+|---|---|
+| Syed Hussain Raza | AI-20036 |
+| Syed Muhammad Bilal Hussain | AI-22046 |
+
 **Paper:** "OPHR: Mastering Volatility Trading with Multi-Agent Deep Reinforcement Learning"  
 **Venue:** NeurIPS 2025  
 **Authors:** Zeting Chen, Xinyu Cai, Molei Qin, Bo An (Nanyang Technological University / Skywork AI)
 
 ---
 
-## 1. Critical Paper Analysis (40%)
+## 1. Critical Paper Analysis
 
 ### 1.1 Problem Statement
 
@@ -58,21 +67,21 @@ The framework is grounded in a Cooperative MDP formulation where the two agents 
 
 **Gamma-Theta Relationship (Eq. 2-3):** The theoretical PnL of a delta-hedged option position is approximated by integrating the difference between instantaneous realized variance and implied variance, weighted by gamma:
 
-PnL = integral from 0 to T of [S_t^2 / 2 * Gamma * (sigma_t^2 - sigma^2)] dt
+$$\text{PnL} = \int_0^T \frac{S_t^2}{2} \, \Gamma \left(\sigma_t^2 - \sigma^2\right) dt$$
 
 In plain terms, this says: if the actual price fluctuations (RV) exceed what was priced into the option (IV), a long gamma position profits, and vice versa. The Gamma term amplifies this profit near the money, and Theta represents the cost of carrying the position over time. This relationship is fundamental because it shows volatility trading is a bet on RV vs. IV, not on price direction.
 
 **n-step TD Learning (Eq. 5):** The OP-Agent uses n-step temporal difference learning to handle the delayed and noisy nature of options rewards:
 
-L(theta) = E[(sum_{k=0}^{n-1} gamma^k * r_{j+k} + gamma^n * Q_{theta'}(s_j^n, argmax_a Q_theta(s_j^n, a)) - Q_theta(s_j, a_j))^2]
+$$L(\theta) = \mathbb{E}\!\left[\left(\sum_{k=0}^{n-1} \gamma^k r_{j+k} + \gamma^n Q_{\theta'}\!\left(s_j^n,\, \arg\max_a Q_\theta(s_j^n, a)\right) - Q_\theta(s_j, a_j)\right)^{\!2}\right]$$
 
 The n-step return aggregates rewards over n time steps before bootstrapping from the target network. This is essential for options trading because a position decision at time t may not show its true value until many hours later due to theta decay and delayed gamma realization. The Double DQN formulation (using the online network for action selection and the target network for evaluation) reduces overestimation bias.
 
-**HR-Agent Relative Reward:** The reward for the HR-Agent at time t+n_hr is: r^hr = V_{t+n_hr} - V_hat_{t+n_hr}, where V is the net value under the selected hedger and V_hat is the net value under the baseline hedger over the same n_hr-step window. This relative reward design is elegant because it removes the common component of PnL that comes from the option position itself, isolating the hedging contribution and providing a cleaner learning signal.
+**HR-Agent Relative Reward:** The reward for the HR-Agent at time t+n_hr is: $$r^{\text{hr}} = V_{t+n_{\text{hr}}} - \hat{V}_{t+n_{\text{hr}}}$$, where V is the net value under the selected hedger and V_hat is the net value under the baseline hedger over the same n_hr-step window. This relative reward design is elegant because it removes the common component of PnL that comes from the option position itself, isolating the hedging contribution and providing a cleaner learning signal.
 
 ---
 
-## 2. Implementation & Reproduction (30%)
+## 2. Implementation & Reproduction
 
 ### 2.1 Implementation Challenges
 
@@ -119,7 +128,7 @@ Notably, even the OP-only variant (without HR-Agent, using baseline hedger) achi
 
 ---
 
-## 3. Critical Evaluation (20%)
+## 3. Critical Evaluation
 
 ### 3.1 Strengths
 
@@ -168,7 +177,7 @@ OPHR can be compared with several alternative approaches:
 
 ---
 
-## 4. Real-World Application Proposal (10%)
+## 4. Real-World Application Proposal
 
 ### Proposed Domain: Insurance Catastrophe Bond (Cat Bond) Portfolio Management
 
@@ -209,4 +218,3 @@ This application is particularly promising because the cat bond market is growin
 
 ---
 
-*Word Count: approximately 3100 words (excluding references and appendices)*
